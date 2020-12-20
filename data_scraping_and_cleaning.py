@@ -15,13 +15,16 @@ import unicodedata
 # Initalize empty lists for dataframes of both stat types
 traditional_stats = []
 advanced_stats = []
-
+# Loop through the two stat pages (traditional and advanced) for the relevant years
 for year in range(2012,2021):
-    trad_url = f"https://www.basketball-reference.com/leagues/NBA_{year}_per_game.html" # traditional 
-    adv_url = f"https://www.basketball-reference.com/leagues/NBA_{year}_advanced.html" # advanced
+    # Get traditional and advanced urls
+    trad_url = f"https://www.basketball-reference.com/leagues/NBA_{year}_per_game.html" 
+    adv_url = f"https://www.basketball-reference.com/leagues/NBA_{year}_advanced.html"
+    # Read in both stat tables
     trad_table = read_html(trad_url,attrs={"class":"stats_table"})[0]
     adv_table = read_html(adv_url,attrs={"class":"stats_table"})[0]
-    trad_table['Date'] = year # Add year column to discern season by season
+    # Add year column to discern season by season
+    trad_table['Date'] = year 
     adv_table['Date'] = year
     traditional_stats.append(trad_table)
     advanced_stats.append(adv_table)
